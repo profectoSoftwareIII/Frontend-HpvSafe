@@ -1,0 +1,7 @@
+{
+  "name": "HpvSafe",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
