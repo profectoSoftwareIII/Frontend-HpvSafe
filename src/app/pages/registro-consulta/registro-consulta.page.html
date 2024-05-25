@@ -1,0 +1,46 @@
+
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Registro consulta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div>
+
+
+    <form class="formularioPrincipal">
+  
+
+      <ion-card class="cards">
+
+        <ion-item>
+          <ion-input label="Fecha" labelPlacement="floating"  type="date" ></ion-input>
+        </ion-item>
+        
+        <ion-item>
+          <ion-select label="Tipo de notificación" label-placement="floating">
+            <ion-select-option value="Email">Email</ion-select-option>
+            <ion-select-option value="SMS">SMS</ion-select-option>
+          </ion-select>
+        </ion-item>
+        
+        <ion-item>
+          <ion-textarea label="Descripción" labelPlacement="floating" type="" placeholder="..."></ion-textarea>
+        </ion-item>
+      </ion-card>
+
+
+      <br>
+      <br>
+  
+      <div class="button-group">
+        <ion-button class="registrar-button" (click)="registrar()">Registrar</ion-button>
+        <ion-button class="cancelar-button" color="danger" (click)="cancelar()">Cancelar</ion-button>
+      </div>
+
+    </form>
+  </div>
+</ion-content>
+

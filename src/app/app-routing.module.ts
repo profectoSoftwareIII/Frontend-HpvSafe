@@ -23,7 +23,15 @@ const routes: Routes = [
     path: '',
     redirectTo: 'home',
     pathMatch: 'full',
+  },  {
+    path: 'recordatorios',
+    loadChildren: () => import('./pages/recordatorios/recordatorios.module').then( m => m.RecordatoriosPageModule)
   },
+  {
+    path: 'registro-consulta',
+    loadChildren: () => import('./pages/registro-consulta/registro-consulta.module').then( m => m.RegistroConsultaPageModule)
+  },
+
 ];
 
 @NgModule({
