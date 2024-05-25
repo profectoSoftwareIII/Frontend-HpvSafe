@@ -23,7 +23,7 @@ export class RecordatoriosPage implements OnInit {
       medico_id: ['', []],
       paciente_id: ['', []],
       tipo_recordatorio: [''],
-      descripcion: ['', [Validators.required]],
+      descripcion: ['', [Validators.required, Validators.maxLength(200),Validators.minLength(1)]],
       fecha: ['', [Validators.required]],
     });
   }

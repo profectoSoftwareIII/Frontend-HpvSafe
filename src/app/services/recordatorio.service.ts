@@ -11,7 +11,7 @@ export class RecordatorioService {
 
   constructor(private http: HttpClient) { }
   postRecordario(modelo: Recordatorio): Observable<Recordatorio> {
-    return this.http.post<Recordatorio>(`${environment.linkServidor}registrarRecordatorio`, {
+    return this.http.post<Recordatorio>(`${environment.linkServidor}recordatorio/registrarRecordatorio/`, {
       paciente_id: modelo.paciente_id,
       medico_id: modelo.medico_id,
       tipo_recordatorio: modelo.tipo_recordatorio,
