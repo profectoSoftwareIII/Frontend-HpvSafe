@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { RecordatoriosPageRoutingModule } from './recordatorios-routing.module';
 
 import { RecordatoriosPage } from './recordatorios.page';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { RecordatoriosPage } from './recordatorios.page';
     FormsModule,
     IonicModule,
     RecordatoriosPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule  
   ],
   declarations: [RecordatoriosPage]
 })

@@ -10,24 +10,34 @@
   <div>
 
 
-    <form class="formularioPrincipal">
-  
-
+    <form class="formularioPrincipal" [formGroup]="recordatorio">
       <ion-card class="cards">
 
         <ion-item>
-          <ion-input label="Fecha" labelPlacement="floating"  type="date" ></ion-input>
+          <ion-input label="Nombre diagnostico" labelPlacement="floating" type="" placeholder="Nombre diagnostico" formControlName="nombre_diagnostico"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-input label="Fecha" labelPlacement="floating"  type="date" formControlName="fecha"></ion-input>
         </ion-item>
         
         <ion-item>
-          <ion-select label="Tipo de notificación" label-placement="floating">
-            <ion-select-option value="Email">Email</ion-select-option>
-            <ion-select-option value="SMS">SMS</ion-select-option>
+          <ion-select label="Paciente" label-placement="floating" formControlName="paciente_id">
+            <ion-select-option value="1">Pedro Perez</ion-select-option>
+            <ion-select-option value="2">Beto Velez</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-select label="Paciente" label-placement="floating" formControlName="tratamiento_id">
+            <ion-select-option value="1">Extirpación electroquirúrgica</ion-select-option>
+            <ion-select-option value="2">Frio extremo</ion-select-option>
+            <ion-select-option value="3">Conización</ion-select-option>
           </ion-select>
         </ion-item>
         
         <ion-item>
-          <ion-textarea label="Descripción" labelPlacement="floating" type="" placeholder="..."></ion-textarea>
+          <ion-textarea label="Descripción" labelPlacement="floating" type="" placeholder="..." formControlName="descripcion"></ion-textarea>
         </ion-item>
       </ion-card>
 
@@ -36,7 +46,7 @@
       <br>
   
       <div class="button-group">
-        <ion-button class="registrar-button" (click)="registrar()">Registrar</ion-button>
+        <ion-button class="registrar-button" (click)="register()">Registrar</ion-button>
         <ion-button class="cancelar-button" color="danger" (click)="cancelar()">Cancelar</ion-button>
       </div>
 

@@ -31,6 +31,10 @@ const routes: Routes = [
     path: 'registro-consulta',
     loadChildren: () => import('./pages/registro-consulta/registro-consulta.module').then( m => m.RegistroConsultaPageModule)
   },
+  {
+    path: 'consulta-paciente',
+    loadChildren: () => import('./pages/consulta-paciente/consulta-paciente.module').then( m => m.ConsultaPacientePageModule)
+  },
 
 ];
 
