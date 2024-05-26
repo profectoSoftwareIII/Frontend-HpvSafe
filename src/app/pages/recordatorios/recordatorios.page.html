@@ -17,10 +17,9 @@
   
         <ion-item>
           <ion-select label="Paciente" label-placement="floating" formControlName="paciente_id">
-            <ion-select-option value="1">Pedro Perez</ion-select-option>
-            <ion-select-option value="2">Beto Velez</ion-select-option>
+            <ion-select-option *ngFor="let paciente of pacientes" [value]="paciente.id">{{ paciente.id }}</ion-select-option>
           </ion-select>
-        </ion-item>
+      </ion-item>
   
         <!-- <ion-list>
           <ion-item>
@@ -40,8 +39,8 @@
         
         <ion-item>
           <ion-select label="Tipo de notificación" label-placement="floating" formControlName="tipo_recordatorio">
-            <ion-select-option value="Email">Email</ion-select-option>
-            <ion-select-option value="SMS">SMS</ion-select-option>
+            <ion-select-option value="email">Email</ion-select-option>
+            <ion-select-option value="telefono">SMS</ion-select-option>
           </ion-select>
         </ion-item>
         

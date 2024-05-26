@@ -8,8 +8,6 @@
 <ion-content>
 
   <div>
-
-
     <form class="formularioPrincipal" [formGroup]="recordatorio">
       <ion-card class="cards">
 
@@ -22,20 +20,18 @@
         </ion-item>
         
         <ion-item>
-          <ion-select label="Paciente" label-placement="floating" formControlName="paciente_id">
-            <ion-select-option value="1">Pedro Perez</ion-select-option>
-            <ion-select-option value="2">Beto Velez</ion-select-option>
-          </ion-select>
+            <ion-select label="Paciente" label-placement="floating" formControlName="paciente_id">
+              <ion-select-option *ngFor="let paciente of pacientes" [value]="paciente.id">{{ paciente.id }}</ion-select-option>
+            </ion-select>
         </ion-item>
 
         <ion-item>
-          <ion-select label="Paciente" label-placement="floating" formControlName="tratamiento_id">
-            <ion-select-option value="1">Extirpación electroquirúrgica</ion-select-option>
-            <ion-select-option value="2">Frio extremo</ion-select-option>
-            <ion-select-option value="3">Conización</ion-select-option>
+          <ion-select label="Tipo tratamiento" label-placement="floating" formControlName="tratamiento_id">
+            <ion-select-option *ngFor="let tratamiento of tratamientos" [value]="tratamiento.id">{{ tratamiento.nombre }}</ion-select-option>
           </ion-select>
         </ion-item>
-        
+
+
         <ion-item>
           <ion-textarea label="Descripción" labelPlacement="floating" type="" placeholder="..." formControlName="descripcion"></ion-textarea>
         </ion-item>
@@ -52,5 +48,7 @@
 
     </form>
   </div>
+
+
 </ion-content>
 

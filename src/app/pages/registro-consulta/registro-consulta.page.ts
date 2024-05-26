@@ -14,6 +14,11 @@ export class RegistroConsultaPage implements OnInit {
 
   recordatorio: FormGroup = new FormGroup({});
 
+  pacientes: any[] = [];
+  tratamientos: any[] = [];
+
+
+
   constructor(private registroConsultaService: RegistroConsultaService,
     private formBuilder: FormBuilder,
     private alertController: AlertController,
@@ -27,9 +32,13 @@ export class RegistroConsultaPage implements OnInit {
       nombre_diagnostico: ['', [Validators.required]],
       fecha: ['', [Validators.required]],
     });
+
   }
 
   ngOnInit() {
+    this.getTratamientos();
+    this.getPacientes();
+
   }
 
   async register() {
@@ -90,5 +99,31 @@ export class RegistroConsultaPage implements OnInit {
   cancelar(){
     console.log('error')
   }
+
+  getTratamientos(){
+    this.registroConsultaService.getTratamiento().subscribe(
+      (datos) => {
+        this.tratamientos = datos;
+        console.log(this.tratamientos);
+      },
+      (err: any) => {
+        console.log('Error al obtener los tratamientos');
+      }
+    );
+  }
+
+  getPacientes(){
+    this.registroConsultaService.getPacientes().subscribe(
+      (datos) => {
+        this.pacientes = datos;
+        console.log(this.pacientes);
+      },
+      (err: any) => {
+        console.log('Error al obtener los pacientes');
+      }
+    );
+  }
+
+
 
 }

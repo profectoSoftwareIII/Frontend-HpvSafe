@@ -1,50 +1,19 @@
-
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Consulta Paciente</ion-title>
+    <ion-title>Establecer recordatorio</ion-title>
   </ion-toolbar>
 </ion-header>
 
-
-<ion-card class="cards">
-  <ion-title class="titulos">Información paciente</ion-title>
-<!-- 
-  <ion-item>
-    <ion-select label="Paciente" label-placement="floating" formControlName="paciente_id">
-      <ion-select-option value="1">Pedro Perez</ion-select-option>
-      <ion-select-option value="2">Beto Velez</ion-select-option>
-    </ion-select>
-  </ion-item>
-
-  <ion-list>
-    <ion-item>
-      jhony
-    </ion-item>
-  </ion-list> -->
-
-</ion-card>
-
 <ion-content>
   <div>
-    <form class="formularioPrincipal">
-      <ion-card class="cards">
-        <ion-title class="titulos">Consultas</ion-title>
-
-
-
-        <ion-list>
-          <ion-item *ngFor="let recordatorio of recordatorios">
-            <ion-label>
-              <h2>{{ recordatorio.paciente }} ({{ recordatorio.cedula }})</h2>
-              <p>Médico: {{ recordatorio.medico }}</p>
-              <p>Fecha: {{ recordatorio.fecha | date:'medium' }}</p> 
-              <p>Diagnóstico: {{ recordatorio.nombre_diagnostico }}</p>
-            </ion-label>
-          </ion-item>
-        </ion-list>
+      <ion-card>
 
       </ion-card>
-    </form>
+
+      <ion-card>
+        fsdfsdf
+      </ion-card>
+
+
   </div>
 </ion-content>
-

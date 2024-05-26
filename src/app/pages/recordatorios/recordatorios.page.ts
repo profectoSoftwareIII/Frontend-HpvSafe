@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Recordatorio } from 'src/app/models/recordatorio.model';
 import { RecordatorioService } from 'src/app/services/recordatorio.service';
+import { RegistroConsultaService } from 'src/app/services/registro-consulta.service';
 
 @Component({
   selector: 'app-recordatorios',
@@ -13,11 +14,13 @@ import { RecordatorioService } from 'src/app/services/recordatorio.service';
 export class RecordatoriosPage implements OnInit {
 
   recordatorio: FormGroup = new FormGroup({});
+  pacientes: any[] = [];
 
   constructor(private recordatorioService: RecordatorioService,
     private formBuilder: FormBuilder,
     private alertController: AlertController,
-    private router: Router) { 
+    private router: Router,
+    private registroConsultaService: RegistroConsultaService) { 
 
     this.recordatorio = this.formBuilder.group({
       medico_id: ['', []],
@@ -29,6 +32,7 @@ export class RecordatoriosPage implements OnInit {
   }
 
   ngOnInit() {
+    this.getPacientes();
   }
 
   async register() {
@@ -87,5 +91,17 @@ export class RecordatoriosPage implements OnInit {
 
   cancelar(){
     console.log('error')
+  }
+
+  getPacientes(){
+    this.registroConsultaService.getPacientes().subscribe(
+      (datos) => {
+        this.pacientes = datos;
+        console.log(this.pacientes);
+      },
+      (err: any) => {
+        console.log('Error al obtener los pacientes');
+      }
+    );
   }
 }
