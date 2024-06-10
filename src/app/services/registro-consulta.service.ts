@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { RegistroConsulta } from '../models/registro-consulta.model';
 import { environment } from 'src/environments/environment';
+import { RegistroPaciente } from '../models/recordatorio.model';
 
 @Injectable({
   providedIn: 'root'
@@ -51,6 +52,25 @@ getPacientes(): Observable<any> {
       })
     );
 }
+
+
+
+postPaciente(modelo: RegistroPaciente): Observable<RegistroPaciente> {
+  return this.http.post<RegistroPaciente>(`${environment.linkServidor}paciente/registrar/`, {
+    nombre: modelo.nombre,
+    apellido: modelo.apellido,
+    cedula: modelo.cedula,
+    edad: modelo.edad,
+    telefono: modelo.telefono,
+    email: modelo.email,
+    tipo_hpv: modelo.tipo_hpv,
+    doctor_id: modelo.doctor_id
+
+  });
+}
+
+
+
 
 
 

@@ -17,7 +17,7 @@
   
         <ion-item>
           <ion-select label="Paciente" label-placement="floating" formControlName="paciente_id">
-            <ion-select-option *ngFor="let paciente of pacientes" [value]="paciente.id">{{ paciente.id }}</ion-select-option>
+            <ion-select-option *ngFor="let paciente of pacientes" [value]="paciente.id">{{ paciente.nombre }}  {{ paciente.apellido}}</ion-select-option>
           </ion-select>
       </ion-item>
   

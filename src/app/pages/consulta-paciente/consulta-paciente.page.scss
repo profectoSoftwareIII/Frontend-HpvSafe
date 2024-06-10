@@ -1,0 +1,62 @@
+
+  
+  ion-header {
+    ion-toolbar {
+      --background: #0000FF; /* Cambia el color de fondo a azul */
+      ion-title {
+        color: #FFFFFF; /* Cambia el color del texto a blanco */
+      }
+    }
+  }
+
+  ion-header {
+    ion-toolbar {
+      --background: #0000FF; /* Cambia el color de fondo a azul */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  
+      ion-title {
+        color: #FFFFFF; /* Cambia el color del texto a blanco */
+        text-align: center;
+        width: 100%;
+      }
+    }
+  }
+
+  .titulos{
+    padding: 10px;
+    color: #0000FF;
+    font-weight: bold;
+  }
+
+  .cards{
+    padding: 20px;
+  }
+
+  .formularioPrincipal{
+    margin-top: -5px;
+
+    padding: 10px;
+  }
+
+  .button-group {
+    display: flex;
+    justify-content: center;
+    padding: 16px;
+  }
+  
+  .registrar-button {
+    --background: #007bff; /* Color azul para el botón Registrar */
+    --color: #ffffff; /* Color de texto blanco */
+    margin: 30px;
+  }
+  
+  .cancelar-button {
+    --background: #dc3545; /* Color rojo para el botón Cancelar */
+    --color: #ffffff; /* Color de texto blanco */
+    margin: 30px;
+  }
+  
+  
+  

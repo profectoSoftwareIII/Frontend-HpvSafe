@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { RegistroPaciente } from 'src/app/models/recordatorio.model';
+import { RecordatorioService } from 'src/app/services/recordatorio.service';
+import { RegistroConsultaService } from 'src/app/services/registro-consulta.service';
 
 @Component({
   selector: 'app-registro-paciente',
@@ -11,20 +14,25 @@ import { AlertController } from '@ionic/angular';
 export class RegistroPacientePage implements OnInit {
 
   paciente: FormGroup = new FormGroup({});
+  id_medico: number = 1;//Cambiar por el id del medico logueado luego
 
 
   constructor(private formBuilder: FormBuilder,
     private alertController: AlertController,
-    private router: Router) {
+    private router: Router,
+    private registroService: RegistroConsultaService) {
+
+
 
     this.paciente = this.formBuilder.group({
-      A: ['', []],
-      B: ['', []],
-      C: ['', []],
-      D: ['', []],
-      E: ['', []],
-      F: ['', []],
-      G: ['', []],
+      nombre: ['', [Validators.required, Validators.maxLength(200)]],
+      apellido: ['', [Validators.required, Validators.maxLength(200)]],
+      cedula: ['', [Validators.required, Validators.maxLength(200)]], // Assuming cedula is alphanumeric
+      edad: ['', [Validators.required, Validators.min(0), Validators.max(150), Validators.pattern('^[0-9]*$')]],
+      telefono: ['', [Validators.required, Validators.maxLength(200)]], 
+      email: ['', [Validators.required, Validators.email]],
+      tipo_hpv: ['', [Validators.required, Validators.maxLength(200)]],
+
     });
 
   }
@@ -33,24 +41,41 @@ export class RegistroPacientePage implements OnInit {
   }
 
   async register() {
-    ///const modelo: RegistroConsulta = new RegistroConsulta();
-    ///modelo.medico_id = 1;
-    //modelo.paciente_id = this.recordatorio.controls['paciente_id']?.value;
-    //modelo.tratamiento_id = this.recordatorio.controls['tratamiento_id']?.value;
-    //modelo.descripcion = this.recordatorio.controls['descripcion'].value;
-    //modelo.nombre_diagnostico = this.recordatorio.controls['nombre_diagnostico'].value;
-    //modelo.fecha = this.recordatorio.controls['fecha'].value;
+    const modelo: RegistroPaciente = new RegistroPaciente();
 
 
+    modelo.doctor_id = 1;
+    modelo.nombre = this.paciente.controls['nombre'].value;
+    modelo.apellido = this.paciente.controls['apellido'].value;
+    modelo.cedula = this.paciente.controls['cedula'].value;
+    modelo.edad = this.paciente.controls['edad'].value;
+    modelo.telefono = this.paciente.controls['telefono'].value;
+    modelo.email = this.paciente.controls['email'].value;
+    modelo.tipo_hpv = this.paciente.controls['tipo_hpv'].value;
 
-    console.log(this.paciente.value)
 
-    this.presentAlert(
-      'Registro exitoso de persona',
-      '',
-      'my-custom-class-success',
-      '/home'
-    )
+    //Agregar alternativa de mensaje si los campos estan incorrectos antes de enviar el mensaje
+
+    console.log(modelo)
+    this.registroService.postPaciente(modelo).subscribe(
+      (datos) => {
+        console.log('Registro almacenado correctamente.');
+        this.presentAlert(
+          'Registro exitoso de recordatorio',
+          '',
+          'my-custom-class-success',
+          '/home'
+        );
+      },
+      (err: any) => {
+        this.presentAlert(
+          'No se pudo registrar el paciente',
+          '',
+          'my-custom-class-success',
+          '/registro-paciente'
+        );
+      }
+    );
   }
 
   async presentAlert(msg: string, titulo: string, cssClase: any, ruta: string ){
@@ -76,6 +101,7 @@ export class RegistroPacientePage implements OnInit {
     const { role } = await alert.onDidDismiss();
     console.log('onDidDismiss resolved with role', role);
   }
+
 
   cancelar(){
     console.log('error')
