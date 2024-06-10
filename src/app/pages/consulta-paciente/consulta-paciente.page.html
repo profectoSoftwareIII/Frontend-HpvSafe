@@ -1,19 +1,32 @@
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>Establecer recordatorio</ion-title>
+  <ion-toolbar>
+    <ion-title>Pacientes</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div>
-      <ion-card>
+  <ion-item>
+    <ion-label>Seleccionar paciente:</ion-label>
+    <ion-select (ionChange)="cambiarPaciente($event)" [value]="pacienteSeleccionado.nombre">
+      <ion-select-option *ngFor="let paciente of pacientes" [value]="paciente.nombre">{{ paciente.nombre }}</ion-select-option>
+    </ion-select>
+  </ion-item>
 
-      </ion-card>
-
-      <ion-card>
-        fsdfsdf
-      </ion-card>
-
-
-  </div>
+  <ion-card *ngIf="pacienteSeleccionado">
+    <img [src]="pacienteSeleccionado.foto" alt="Foto del paciente" />
+    <ion-card-header>
+      <ion-card-title>{{ pacienteSeleccionado.nombre }}</ion-card-title>
+      <ion-card-subtitle>Edad: {{ pacienteSeleccionado.edad }}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Ciudad de nacimiento: {{ pacienteSeleccionado.ciudadNacimiento }}</p>
+      <p>Género: {{ pacienteSeleccionado.genero }}</p>
+      <p>Grupo sanguíneo: {{ pacienteSeleccionado.grupoSanguineo }}</p>
+      <p>Dirección: {{ pacienteSeleccionado.direccion }}</p>
+      <p>Teléfono: {{ pacienteSeleccionado.telefono }}</p>
+      <p>Email: {{ pacienteSeleccionado.email }}</p>
+      <p>EPS: {{ pacienteSeleccionado.eps }}</p>
+      <p>Historial médico: {{ pacienteSeleccionado.historial }}</p>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

@@ -35,6 +35,18 @@ const routes: Routes = [
     path: 'consulta-paciente',
     loadChildren: () => import('./pages/consulta-paciente/consulta-paciente.module').then( m => m.ConsultaPacientePageModule)
   },
+  {
+    path: 'modulo-prevencion',
+    loadChildren: () => import('./pages/modulo-prevencion/modulo-prevencion.module').then( m => m.ModuloPrevencionPageModule)
+  },
+  {
+    path: 'consulta-pacientes',
+    loadChildren: () => import('./pages/consulta-pacientes/consulta-pacientes.module').then( m => m.ConsultaPacientesPageModule)
+  },
+  {
+    path: 'registro-paciente',
+    loadChildren: () => import('./pages/registro-paciente/registro-paciente.module').then( m => m.RegistroPacientePageModule)
+  },
 
 ];
 

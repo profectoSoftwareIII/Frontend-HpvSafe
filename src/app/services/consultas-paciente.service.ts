@@ -12,7 +12,6 @@ export class ConsultasPacienteService {
 
 
 
-
   getConsultasPaciente(id: number): Observable<any> {
 
     return this.http
