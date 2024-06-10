@@ -9,10 +9,9 @@ import { tap } from 'rxjs';
 })
 export class ModuloPrevencionPage implements OnInit {
 
-  cartas: any[] = [
-  ];
+  cartas: any[] = [];
 
-  constructor(private moduloService:ModuloPrevencionService,) { }
+  constructor(private moduloService:ModuloPrevencionService) { }
 
   ngOnInit() {
     this.getArticulosPagina();
@@ -24,6 +23,12 @@ export class ModuloPrevencionPage implements OnInit {
   }
 
 
+  /**
+   * Retrieves the articles for the page.
+   * Subscribes to the `getArticulosPrevencion` method of the `moduloService` and assigns the retrieved data to `this.cartas`.
+   * Logs the `this.cartas` to the console.
+   * Logs an error message if there is an error while retrieving the list of articles.
+   */
   getArticulosPagina(){
     this.moduloService.getArticulosPrevencion().subscribe(
       (datos) => {

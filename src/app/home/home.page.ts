@@ -19,11 +19,11 @@ export class HomePage {
       this.linksA = [
         { name: 'Recordatorio', path: '/recordatorios' },
         { name: 'Registro Consulta', path: '/registro-consulta' },
-        { name: 'Consulta Paciente(Consultas que tiene un paciente)', path: '/consulta-pacientes' }
+        { name: 'Consulta Paciente(Consultas que tiene un paciente)', path: '/consulta-paciente' }
       ];
       this.linksB = [
         { name: 'Modulo Prevencion', path: '/modulo-prevencion' },
-        { name: 'Consulta Paciente(Pacientes de un medico)', path: '/consulta-paciente' },
+        { name: 'Consulta Paciente(Pacientes de un medico)', path: '/consulta-pacientes' },
         { name: 'Registro Paciente', path: '/registro-paciente' }
       ];
     }
