@@ -6,3 +6,4 @@ export class RegistroConsulta{
     descripcion: string | undefined;
     fecha: Date | undefined
 }
+

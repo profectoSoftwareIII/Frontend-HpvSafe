@@ -13,8 +13,30 @@
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+
+  <div id="containerA">
+    Iteracion 1
+    <ion-list>
+      <ion-item button *ngFor="let link of linksA" [routerLink]="link.path">
+        <ion-label>{{ link.name }}</ion-label>
+      </ion-item>
+    </ion-list>
   </div>
+
+  <div id="containerB">
+    Iteracion 2
+    <ion-list>
+      <ion-item button *ngFor="let link of linksB" [routerLink]="link.path">
+        <ion-label>{{ link.name }}</ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+
 </ion-content>
+
+
+
+
+
+
+

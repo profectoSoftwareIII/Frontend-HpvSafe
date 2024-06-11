@@ -13,8 +13,38 @@ import { RegistroConsultaService } from 'src/app/services/registro-consulta.serv
 
 export class ConsultaPacientePage implements OnInit {
 
-  pacientes: any[] = [];
-  consultas: any[] = [];
+  pacientes: any[] = [
+    {
+      nombre: 'Juan Pérez',
+      foto: 'https://ionicframework.com/docs/img/demos/avatar.svg',
+      fechaNacimiento: '1989-05-12',
+      ciudadNacimiento: 'Bogotá',
+      genero: 'Masculino',
+      grupoSanguineo: 'O+',
+      direccion: 'Calle 123 # 45-67',
+      telefono: '312 555 8899',
+      email: 'juan.perez@example.com',
+      eps: 'EPS Ejemplo',
+      historial: 'Historial médico de Juan Pérez...',
+    },
+    {
+      nombre: 'María Gómez',
+      foto: 'https://ionicframework.com/docs/img/demos/avatar.svg',
+      fechaNacimiento: '1996-08-22',
+      ciudadNacimiento: 'Medellín',
+      genero: 'Femenino',
+      grupoSanguineo: 'A-',
+      direccion: 'Carrera 56 # 78-90',
+      telefono: '321 666 7788',
+      email: 'maria.gomez@example.com',
+      eps: 'Otra EPS',
+      historial: 'Historial médico de María Gómez...',
+    },
+
+  ];
+
+  pacienteSeleccionado: any = this.pacientes[0]; // Paciente inicial
+
 
 
   constructor(private consultaService:ConsultasPacienteService,
@@ -28,22 +58,10 @@ export class ConsultaPacientePage implements OnInit {
 
 
   getPacientes(){
-    this.registroConsultaService.getPacientes().subscribe(
-      (datos) => {
-        this.pacientes = datos;
-        console.log(this.pacientes);
-      },
-      (err: any) => {
-        console.log('Error al obtener los pacientes');
-      }
-    );
+    console.log("Si")
   }
-
-  get_consultas(id: number) {
-    this.consultaService
-      .getConsultasPaciente(id)
-      .pipe(tap((data) => (this.consultas = data)))
-      .subscribe();
+  cambiarPaciente(event: any) {
+    this.pacienteSeleccionado = this.pacientes.find(p => p.nombre === event.detail.value);
   }
 
 }
