@@ -7,24 +7,16 @@ import { ConsultasPacienteService } from 'src/app/services/consultas-paciente.se
   styleUrls: ['./consulta-pacientes.page.scss'],
 })
 export class ConsultaPacientesPage implements OnInit {
-
   id_medico: number = 1; //Cambiar luego a un valor que se obtenga del usuario logueado
-  datos_medico: any[] = [];//Datos de prueba, no son necesarios luego
+  datos_medico: any[] = []; //Datos de prueba, no son necesarios luego
   pacientes: any[] = [];
   pacienteSeleccionado: any = []; // Paciente inicial
 
-
-  
-
-  constructor(private consultaService:ConsultasPacienteService) { }
+  constructor(private consultaService: ConsultasPacienteService) {}
 
   ngOnInit() {
     //Obtener los pacientes de un médico
     this.getPacientesDeUnMedico();
-
-
-
-
   }
 
   /**
@@ -35,13 +27,13 @@ export class ConsultaPacientesPage implements OnInit {
    */
 
   //CAMBIAR LUEGO PARA QUE NO SOLICITE TODOS LOS PACIENTES
-  getPacientesDeUnMedico(){
+  getPacientesDeUnMedico() {
     this.consultaService.getPacientesMedico(this.id_medico).subscribe(
       (datos) => {
         this.datos_medico = datos.medico;
         this.pacientes = datos.pacientes;
 
-        if(this.pacientes.length > 0){
+        if (this.pacientes.length > 0) {
           this.pacienteSeleccionado = this.pacientes[0];
         }
 
@@ -57,7 +49,8 @@ export class ConsultaPacientesPage implements OnInit {
   }
 
   cambiarPaciente(event: any) {
-    this.pacienteSeleccionado = this.pacientes.find(p => p.nombre === event.detail.value);
+    this.pacienteSeleccionado = this.pacientes.find(
+      (p) => p.nombre === event.detail.value
+    );
   }
-
 }

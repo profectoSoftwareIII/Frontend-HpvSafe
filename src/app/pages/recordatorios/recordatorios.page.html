@@ -1,4 +1,3 @@
-
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title>Establecer recordatorio</ion-title>
@@ -11,22 +10,23 @@
 
 
     <form class="formularioPrincipal" [formGroup]="recordatorio">
-  
+
       <ion-card class="cards">
         <ion-title class="titulos">Información paciente</ion-title>
-  
+
         <ion-item>
           <ion-select label="Paciente" label-placement="floating" formControlName="paciente_id">
-            <ion-select-option *ngFor="let paciente of pacientes" [value]="paciente.id">{{ paciente.nombre }}  {{ paciente.apellido}}</ion-select-option>
+            <ion-select-option *ngFor="let paciente of pacientes" [value]="paciente.id">{{ paciente.nombre }} {{
+              paciente.apellido}}</ion-select-option>
           </ion-select>
-      </ion-item>
-  
+        </ion-item>
+
         <!-- <ion-list>
           <ion-item>
             jhony
           </ion-item>
         </ion-list> -->
-  
+
       </ion-card>
 
 
@@ -34,29 +34,28 @@
         <ion-title class="titulos">Tratamiento</ion-title>
 
         <ion-item>
-          <ion-input label="Fecha" labelPlacement="floating"  type="date" formControlName="fecha"></ion-input>
+          <ion-input label="Fecha" labelPlacement="floating" type="date" formControlName="fecha"></ion-input>
         </ion-item>
-        
+
         <ion-item>
           <ion-select label="Tipo de notificación" label-placement="floating" formControlName="tipo_recordatorio">
             <ion-select-option value="email">Email</ion-select-option>
             <ion-select-option value="telefono">SMS</ion-select-option>
           </ion-select>
         </ion-item>
-        
+
         <ion-item>
-          <ion-textarea label="Descripción" labelPlacement="floating" type="" placeholder="..." formControlName="descripcion"></ion-textarea>
+          <ion-textarea label="Descripción" labelPlacement="floating" type="" placeholder="..."
+            formControlName="descripcion"></ion-textarea>
         </ion-item>
       </ion-card>
       <br>
       <br>
-  
-      <div class="button-group">
-        <ion-button class="registrar-button" (click)="register()">Registrar</ion-button>
-        <ion-button class="cancelar-button" color="danger" (click)="cancelar()">Cancelar</ion-button>
+      <div class="button-group" style="display: flex; justify-content: space-between; width: 100%;">
+        <ion-button type="submit" color="primary" style="width: 45%;">Registrar</ion-button>
+        <ion-button color="danger" (click)="cancelar()" style="width: 45%;">Cancelar</ion-button>
       </div>
 
     </form>
   </div>
 </ion-content>
-

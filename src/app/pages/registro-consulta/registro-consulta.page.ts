@@ -12,21 +12,19 @@ import { ConsultasPacienteService } from 'src/app/services/consultas-paciente.se
   styleUrls: ['./registro-consulta.page.scss'],
 })
 export class RegistroConsultaPage implements OnInit {
-
   recordatorio: FormGroup = new FormGroup({});
 
   pacientes: any[] = [];
   tratamientos: any[] = [];
-  id_medico: number = 1;//CAMBIAR LUEGO POR EL ID DEL MEDICO QUE ESTA LOGUEADO
+  id_medico: number = 1; //CAMBIAR LUEGO POR EL ID DEL MEDICO QUE ESTA LOGUEADO
 
-
-
-  constructor(private registroConsultaService: RegistroConsultaService,
+  constructor(
+    private registroConsultaService: RegistroConsultaService,
     private formBuilder: FormBuilder,
     private alertController: AlertController,
     private router: Router,
-    private consultaPacienteService: ConsultasPacienteService) { 
-
+    private consultaPacienteService: ConsultasPacienteService
+  ) {
     this.recordatorio = this.formBuilder.group({
       medico_id: ['', []],
       paciente_id: ['', []],
@@ -35,13 +33,11 @@ export class RegistroConsultaPage implements OnInit {
       nombre_diagnostico: ['', [Validators.required]],
       fecha: ['', [Validators.required]],
     });
-
   }
 
   ngOnInit() {
     this.getTratamientos();
     this.getPacientes();
-
   }
 
   async register() {
@@ -50,15 +46,16 @@ export class RegistroConsultaPage implements OnInit {
     modelo.paciente_id = this.recordatorio.controls['paciente_id']?.value;
     modelo.tratamiento_id = this.recordatorio.controls['tratamiento_id']?.value;
     modelo.descripcion = this.recordatorio.controls['descripcion'].value;
-    modelo.nombre_diagnostico = this.recordatorio.controls['nombre_diagnostico'].value;
+    modelo.nombre_diagnostico =
+      this.recordatorio.controls['nombre_diagnostico'].value;
     modelo.fecha = this.recordatorio.controls['fecha'].value;
 
-    console.log(modelo)
+    console.log(modelo);
     this.registroConsultaService.postRecordario(modelo).subscribe(
       (datos) => {
         console.log('Registro almacenado correctamente.');
         this.presentAlert(
-          'Registro exitoso de recordatorio',
+          'Registro exitoso de consulta',
           '',
           'my-custom-class-success',
           '/home'
@@ -66,7 +63,7 @@ export class RegistroConsultaPage implements OnInit {
       },
       (err: any) => {
         this.presentAlert(
-          'Registro no exitoso de recordatorio',
+          'Error al registrar consulta',
           '',
           'my-custom-class-success',
           '/registro-consulta'
@@ -75,7 +72,7 @@ export class RegistroConsultaPage implements OnInit {
     );
   }
 
-  async presentAlert(msg: string, titulo: string, cssClase: any, ruta: string ){
+  async presentAlert(msg: string, titulo: string, cssClase: any, ruta: string) {
     const alert = await this.alertController.create({
       cssClass: cssClase,
       header: titulo,
@@ -99,11 +96,11 @@ export class RegistroConsultaPage implements OnInit {
     console.log('onDidDismiss resolved with role', role);
   }
 
-  cancelar(){
-    console.log('error')
+  cancelar() {
+    console.log('error');
   }
 
-  getTratamientos(){
+  getTratamientos() {
     this.registroConsultaService.getTratamiento().subscribe(
       (datos) => {
         this.tratamientos = datos;
@@ -115,9 +112,7 @@ export class RegistroConsultaPage implements OnInit {
     );
   }
 
-
-
-  getPacientes(){
+  getPacientes() {
     this.consultaPacienteService.getPacientesMedico(this.id_medico).subscribe(
       (datos) => {
         this.pacientes = datos.pacientes;
@@ -131,7 +126,4 @@ export class RegistroConsultaPage implements OnInit {
       }
     );
   }
-
-
-
 }

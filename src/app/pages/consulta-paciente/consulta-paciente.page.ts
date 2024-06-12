@@ -1,67 +1,56 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { tap } from 'rxjs';
+import { Paciente } from 'src/app/interfaces/consulta.interface';
 import { ConsultasPacienteService } from 'src/app/services/consultas-paciente.service';
-import { RegistroConsultaService } from 'src/app/services/registro-consulta.service';
 
 @Component({
   selector: 'app-consulta-paciente',
   templateUrl: './consulta-paciente.page.html',
   styleUrls: ['./consulta-paciente.page.scss'],
 })
-
-
 export class ConsultaPacientePage implements OnInit {
+  paciente: Paciente | undefined;
+  consultas: any[] = [];
+  pacientes: Paciente[] = [];
 
-  pacientes: any[] = [
-    {
-      nombre: 'Juan Pérez',
-      foto: 'https://ionicframework.com/docs/img/demos/avatar.svg',
-      fechaNacimiento: '1989-05-12',
-      ciudadNacimiento: 'Bogotá',
-      genero: 'Masculino',
-      grupoSanguineo: 'O+',
-      direccion: 'Calle 123 # 45-67',
-      telefono: '312 555 8899',
-      email: 'juan.perez@example.com',
-      eps: 'EPS Ejemplo',
-      historial: 'Historial médico de Juan Pérez...',
-    },
-    {
-      nombre: 'María Gómez',
-      foto: 'https://ionicframework.com/docs/img/demos/avatar.svg',
-      fechaNacimiento: '1996-08-22',
-      ciudadNacimiento: 'Medellín',
-      genero: 'Femenino',
-      grupoSanguineo: 'A-',
-      direccion: 'Carrera 56 # 78-90',
-      telefono: '321 666 7788',
-      email: 'maria.gomez@example.com',
-      eps: 'Otra EPS',
-      historial: 'Historial médico de María Gómez...',
-    },
-
-  ];
-
-  pacienteSeleccionado: any = this.pacientes[0]; // Paciente inicial
-
-
-
-  constructor(private consultaService:ConsultasPacienteService,
-    private registroConsultaService: RegistroConsultaService
-
-  ) { }
+  constructor(private consultaService: ConsultasPacienteService) {}
 
   ngOnInit() {
     this.getPacientes();
   }
 
-
-  getPacientes(){
-    console.log("Si")
+  getPacientes() {
+    this.consultaService.getPacientes().subscribe((data: Paciente[]) => {
+      this.pacientes = data;
+    });
   }
+
   cambiarPaciente(event: any) {
-    this.pacienteSeleccionado = this.pacientes.find(p => p.nombre === event.detail.value);
+    const pacienteIdSeleccionado = event.detail.value;
+    console.log(pacienteIdSeleccionado);
+    if (pacienteIdSeleccionado) {
+      this.paciente = this.pacientes.find(
+        (p) => p.id === pacienteIdSeleccionado
+      );
+      this.obtenerConsultas(pacienteIdSeleccionado);
+    }
   }
 
+  obtenerConsultas(idPacienteSeleccionado: number) {
+    const pacienteSeleccionado = this.pacientes.find(
+      (paciente) => paciente.id === idPacienteSeleccionado
+    );
+    if (pacienteSeleccionado) {
+      // Aquí puedes realizar cualquier acción con el paciente seleccionado
+      console.log('Paciente seleccionado:', pacienteSeleccionado);
+      this.getConsultas(pacienteSeleccionado.id);
+    } else {
+      console.log('No se encontró el paciente seleccionado');
+    }
+  }
+  getConsultas(id: number) {
+    this.consultaService.getConsultasPaciente(id).subscribe((data) => {
+      console.log(data);
+      this.paciente = data;
+    });
+  }
 }

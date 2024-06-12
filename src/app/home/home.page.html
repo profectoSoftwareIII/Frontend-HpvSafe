@@ -1,42 +1,38 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>
-      HPV SAFE
+      <div style="display: flex; align-items: center;">
+        <ion-icon name="shield-checkmark" style="margin: 0 10px;"></ion-icon>
+        <span>HPV SAFE</span>
+      </div>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">HPV SAFE</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
+<ion-content [fullscreen]="true" class="custom-content">
 
-  <div id="containerA">
-    Iteracion 1
+  <ion-card class="custom-container">
+    <ion-card-header>
+      <ion-card-title>Iteracion 1</ion-card-title>
+    </ion-card-header>
     <ion-list>
       <ion-item button *ngFor="let link of linksA" [routerLink]="link.path">
+        <ion-icon slot="start" [name]="link.icon"></ion-icon>
         <ion-label>{{ link.name }}</ion-label>
       </ion-item>
     </ion-list>
-  </div>
+  </ion-card>
 
-  <div id="containerB">
-    Iteracion 2
+  <ion-card class="custom-container">
+    <ion-card-header>
+      <ion-card-title>Iteracion 2</ion-card-title>
+    </ion-card-header>
     <ion-list>
       <ion-item button *ngFor="let link of linksB" [routerLink]="link.path">
+        <ion-icon slot="start" [name]="link.icon"></ion-icon>
         <ion-label>{{ link.name }}</ion-label>
       </ion-item>
     </ion-list>
-  </div>
-
+  </ion-card>
 </ion-content>
-
-
-
-
-
-
-

@@ -1,4 +1,3 @@
-
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title>Registro paciente</ion-title>
@@ -7,53 +6,48 @@
 
 <ion-content>
 
- 
+
   <div>
     <form class="formularioPrincipal" [formGroup]="paciente">
       <ion-card class="cards">
-
         <ion-item>
-          <ion-input label="Nombre" labelPlacement="floating" type="string" placeholder="..." formControlName="nombre"></ion-input>
+          <ion-input label="Nombre" labelPlacement="floating" type="string" placeholder="..."
+            formControlName="nombre"></ion-input>
         </ion-item>
 
         <ion-item>
-          <ion-input label="Apellido" labelPlacement="floating" type="string" placeholder="" formControlName="apellido"></ion-input>
+          <ion-input label="Apellido" labelPlacement="floating" type="string" placeholder=""
+            formControlName="apellido"></ion-input>
         </ion-item>
 
         <ion-item>
-          <ion-input label="Cedula" labelPlacement="floating" type="string" placeholder="Cedula" formControlName="cedula"></ion-input>
+          <ion-input label="Cedula" labelPlacement="floating" type="string" placeholder="Cedula"
+            formControlName="cedula"></ion-input>
         </ion-item>
 
         <ion-item>
-          <ion-input label="Edad" labelPlacement="floating" type="number" placeholder="Edad" formControlName="edad"></ion-input>
+          <ion-input label="Edad" labelPlacement="floating" type="number" placeholder="Edad"
+            formControlName="edad"></ion-input>
         </ion-item>
 
         <ion-item>
-          <ion-input label="Telefono" labelPlacement="floating" type="string" placeholder="Telefono" formControlName="telefono"></ion-input>
+          <ion-input label="Telefono" labelPlacement="floating" type="string" placeholder="Telefono"
+            formControlName="telefono"></ion-input>
         </ion-item>
 
         <ion-item>
-          <ion-input label="Email" labelPlacement="floating" type="string" placeholder="Email" formControlName="email"></ion-input>
+          <ion-input label="Email" labelPlacement="floating" type="string" placeholder="Email"
+            formControlName="email"></ion-input>
         </ion-item>
 
         <ion-item>
-          <ion-input label="Tipo" labelPlacement="floating" type="string" placeholder="Tipo HPV" formControlName="tipo_hpv"></ion-input>
+          <ion-input label="Tipo" labelPlacement="floating" type="string" placeholder="Tipo HPV"
+            formControlName="tipo_hpv"></ion-input>
         </ion-item>
-
-
-
-
-
-
       </ion-card>
-
-
-      <br>
-      <br>
-  
-      <div class="button-group">
-        <ion-button class="registrar-button" (click)="register()">Registrar</ion-button>
-        <ion-button class="cancelar-button" color="danger" (click)="cancelar()">Cancelar</ion-button>
+      <div class="button-group" style="display: flex; justify-content: space-between; width: 100%;">
+        <ion-button type="submit" color="primary" style="width: 45%;" (click)="register()">Registrar</ion-button>
+        <ion-button color="danger" (click)="cancelar()" style="width: 45%;">Cancelar</ion-button>
       </div>
 
     </form>
@@ -61,4 +55,3 @@
 
 
 </ion-content>
-

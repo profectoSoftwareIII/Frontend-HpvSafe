@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
 import { RegistroPaciente } from 'src/app/models/recordatorio.model';
-import { RecordatorioService } from 'src/app/services/recordatorio.service';
 import { RegistroConsultaService } from 'src/app/services/registro-consulta.service';
 
 @Component({
@@ -11,40 +10,47 @@ import { RegistroConsultaService } from 'src/app/services/registro-consulta.serv
   templateUrl: './registro-paciente.page.html',
   styleUrls: ['./registro-paciente.page.scss'],
 })
-export class RegistroPacientePage implements OnInit {
+export class RegistroPacientePage {
+  paciente: FormGroup;
+  id_medico: number = 1; // Cambiar por el id del medico logueado luego
 
-  paciente: FormGroup = new FormGroup({});
-  id_medico: number = 1;//Cambiar por el id del medico logueado luego
-
-
-  constructor(private formBuilder: FormBuilder,
-    private alertController: AlertController,
+  constructor(
+    private formBuilder: FormBuilder,
+    private toastController: ToastController,
     private router: Router,
-    private registroService: RegistroConsultaService) {
-
-
-
+    private registroService: RegistroConsultaService
+  ) {
     this.paciente = this.formBuilder.group({
       nombre: ['', [Validators.required, Validators.maxLength(200)]],
       apellido: ['', [Validators.required, Validators.maxLength(200)]],
       cedula: ['', [Validators.required, Validators.maxLength(200)]], // Assuming cedula is alphanumeric
-      edad: ['', [Validators.required, Validators.min(0), Validators.max(150), Validators.pattern('^[0-9]*$')]],
-      telefono: ['', [Validators.required, Validators.maxLength(200)]], 
+      edad: [
+        '',
+        [
+          Validators.required,
+          Validators.min(0),
+          Validators.max(150),
+          Validators.pattern('^[0-9]*$'),
+        ],
+      ],
+      telefono: ['', [Validators.required, Validators.maxLength(200)]],
       email: ['', [Validators.required, Validators.email]],
-      tipo_hpv: ['', [Validators.required, Validators.maxLength(200)]],
-
+      tipo_hpv: [''],
     });
-
-  }
-
-  ngOnInit() {
   }
 
   async register() {
+    if (this.paciente.invalid) {
+      await this.presentToast(
+        'Por favor completa todos los campos correctamente',
+        'danger',
+        'middle'
+      );
+      return;
+    }
+
     const modelo: RegistroPaciente = new RegistroPaciente();
-
-
-    modelo.doctor_id = 1;
+    //modelo.doctor_id = this.id_medico;
     modelo.nombre = this.paciente.controls['nombre'].value;
     modelo.apellido = this.paciente.controls['apellido'].value;
     modelo.cedula = this.paciente.controls['cedula'].value;
@@ -53,58 +59,40 @@ export class RegistroPacientePage implements OnInit {
     modelo.email = this.paciente.controls['email'].value;
     modelo.tipo_hpv = this.paciente.controls['tipo_hpv'].value;
 
-
-    //Agregar alternativa de mensaje si los campos estan incorrectos antes de enviar el mensaje
-
-    console.log(modelo)
-    this.registroService.postPaciente(modelo).subscribe(
-      (datos) => {
-        console.log('Registro almacenado correctamente.');
-        this.presentAlert(
-          'Registro exitoso de recordatorio',
-          '',
-          'my-custom-class-success',
-          '/home'
-        );
+    this.registroService.postPaciente(modelo).subscribe({
+      next: async (datos) => {
+        console.log('Registro almacenado correctamente.', datos);
+        await this.presentToast('Registro exitoso', 'success', 'bottom');
+        this.paciente.reset();
       },
-      (err: any) => {
-        this.presentAlert(
+      error: async (err: any) => {
+        console.error('Error al registrar el paciente', err);
+        await this.presentToast(
           'No se pudo registrar el paciente',
-          '',
-          'my-custom-class-success',
-          '/registro-paciente'
+          'danger',
+          'middle'
         );
-      }
-    );
-  }
-
-  async presentAlert(msg: string, titulo: string, cssClase: any, ruta: string ){
-    const alert = await this.alertController.create({
-      cssClass: cssClase,
-      header: titulo,
-      subHeader: '',
-      message: msg,
-      buttons: [
-        {
-          text: 'Ok',
-          handler: () => {
-            this.router.navigate([ruta]);
-            console.log('Confirm Okay');
-          },
-        },
-      ],
-      mode: 'ios',
+        this.router.navigate(['/registro-paciente']);
+      },
     });
-
-    await alert.present();
-
-    const { role } = await alert.onDidDismiss();
-    console.log('onDidDismiss resolved with role', role);
   }
 
-
-  cancelar(){
-    console.log('error')
+  async presentToast(
+    msg: string,
+    color: 'success' | 'danger',
+    position: 'middle' | 'bottom'
+  ) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 2000,
+      color: color,
+      icon: color === 'success' ? 'checkmark-circle' : 'close-circle',
+      position: position,
+    });
+    toast.present();
   }
 
+  cancelar() {
+    console.log('error');
+  }
 }

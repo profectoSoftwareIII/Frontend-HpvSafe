@@ -1,27 +1,16 @@
-#container {
-  text-align: center;
-
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+.custom-container {
+  margin: 10px; /* Márgenes exteriores */
+  padding: 10px; /* Relleno interno */
+  border-radius: 8px; /* Redondeo de bordes */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra */
+  background-color: #5e63b6; /* Color de fondo */
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+ion-card {
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: none; /* Sin sombra */
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
-}
-
-#container a {
-  text-decoration: none;
+ion-card-header {
+  padding: 10px; /* Relleno del encabezado */
 }

@@ -1,4 +1,3 @@
-
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title>Registro consulta</ion-title>
@@ -12,43 +11,49 @@
       <ion-card class="cards">
 
         <ion-item>
-          <ion-input label="Nombre diagnostico" labelPlacement="floating" type="" placeholder="Nombre diagnostico" formControlName="nombre_diagnostico"></ion-input>
+          <ion-input label="Nombre diagnostico" labelPlacement="floating" type="" placeholder="Nombre diagnostico"
+            formControlName="nombre_diagnostico"></ion-input>
         </ion-item>
 
         <ion-item>
-          <ion-input label="Fecha" labelPlacement="floating"  type="date" formControlName="fecha"></ion-input>
+          <ion-input label="Fecha" labelPlacement="floating" type="date" formControlName="fecha"></ion-input>
         </ion-item>
-        
+
         <ion-item>
-            <ion-select label="Paciente" label-placement="floating" formControlName="paciente_id">
-              <ion-select-option *ngFor="let paciente of pacientes" [value]="paciente.id">{{ paciente.nombre }} {{ paciente.apellido}}  </ion-select-option>
-            </ion-select>
+          <ion-select label="Paciente" label-placement="floating" formControlName="paciente_id">
+            <ion-select-option *ngFor="let paciente of pacientes" [value]="paciente.id">{{ paciente.nombre }} {{
+              paciente.apellido}} </ion-select-option>
+          </ion-select>
         </ion-item>
 
         <ion-item>
           <ion-select label="Tipo tratamiento" label-placement="floating" formControlName="tratamiento_id">
-            <ion-select-option *ngFor="let tratamiento of tratamientos" [value]="tratamiento.id">{{ tratamiento.nombre }}</ion-select-option>
+            <ion-select-option *ngFor="let tratamiento of tratamientos" [value]="tratamiento.id">{{ tratamiento.nombre
+              }}</ion-select-option>
           </ion-select>
         </ion-item>
 
-
         <ion-item>
-          <ion-textarea label="Descripción" labelPlacement="floating" type="" placeholder="..." formControlName="descripcion"></ion-textarea>
+          <ion-textarea label="Descripción" labelPlacement="floating" type="" placeholder="..."
+            formControlName="descripcion" class="large-textarea"></ion-textarea>
         </ion-item>
       </ion-card>
 
+      <br>
+      <br>
 
-      <br>
-      <br>
-  
-      <div class="button-group">
-        <ion-button class="registrar-button" (click)="register()">Registrar</ion-button>
-        <ion-button class="cancelar-button" color="danger" (click)="cancelar()">Cancelar</ion-button>
+      <div class="button-group" style="display: flex; justify-content: space-between; width: 100%;">
+        <ion-button type="submit" color="primary" style="width: 45%;" (click)="register()">Registrar</ion-button>
+        <ion-button color="danger" (click)="cancelar()" style="width: 45%;">Cancelar</ion-button>
       </div>
-
     </form>
   </div>
 
-
 </ion-content>
 
+<style>
+  .large-textarea {
+    min-height: 100px;
+    /* Adjust the height as needed */
+  }
+</style>
