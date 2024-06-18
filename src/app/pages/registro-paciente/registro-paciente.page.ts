@@ -36,6 +36,7 @@ export class RegistroPacientePage {
       telefono: ['', [Validators.required, Validators.maxLength(200)]],
       email: ['', [Validators.required, Validators.email]],
       tipo_hpv: [''],
+      genero: ['', Validators.required],
     });
   }
 
@@ -49,15 +50,16 @@ export class RegistroPacientePage {
       return;
     }
 
-    const modelo: RegistroPaciente = new RegistroPaciente();
-    //modelo.doctor_id = this.id_medico;
-    modelo.nombre = this.paciente.controls['nombre'].value;
-    modelo.apellido = this.paciente.controls['apellido'].value;
-    modelo.cedula = this.paciente.controls['cedula'].value;
-    modelo.edad = this.paciente.controls['edad'].value;
-    modelo.telefono = this.paciente.controls['telefono'].value;
-    modelo.email = this.paciente.controls['email'].value;
-    modelo.tipo_hpv = this.paciente.controls['tipo_hpv'].value;
+    const modelo: RegistroPaciente = new RegistroPaciente(
+      this.paciente.controls['nombre'].value,
+      this.paciente.controls['apellido'].value,
+      this.paciente.controls['cedula'].value,
+      this.paciente.controls['edad'].value,
+      this.paciente.controls['telefono'].value,
+      this.paciente.controls['email'].value,
+      this.paciente.controls['genero'].value,
+      this.paciente.controls['tipo_hpv'].value
+    );
 
     this.registroService.postPaciente(modelo).subscribe({
       next: async (datos) => {

@@ -31,6 +31,13 @@
         </ion-item>
 
         <ion-item>
+          <ion-select label="Genero" label-placement="floating" formControlName="genero">
+            <ion-select-option value="femenino">Femenino</ion-select-option>
+            <ion-select-option value="masculino">Masculino</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
           <ion-input label="Telefono" labelPlacement="floating" type="string" placeholder="Telefono"
             formControlName="telefono"></ion-input>
         </ion-item>
@@ -47,7 +54,7 @@
       </ion-card>
       <div class="button-group" style="display: flex; justify-content: space-between; width: 100%;">
         <ion-button type="submit" color="primary" style="width: 45%;" (click)="register()">Registrar</ion-button>
-        <ion-button color="danger" (click)="cancelar()" style="width: 45%;">Cancelar</ion-button>
+        <ion-button routerLink="/home" color="danger" (click)="cancelar()" style="width: 45%;">Cancelar</ion-button>
       </div>
 
     </form>

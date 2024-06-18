@@ -7,6 +7,7 @@ export interface Paciente {
   telefono: string;
   email: string;
   consultas: Consulta[];
+  id_medico: 1;
 }
 
 export interface Consulta {
